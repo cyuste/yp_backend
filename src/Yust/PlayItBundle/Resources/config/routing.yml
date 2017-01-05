@@ -1,0 +1,7 @@
+yust_play_it_homepage:
+    path:     /
+    defaults: { _controller: YustPlayItBundle:Default:index }
+
+yust_play_it_delete:
+    path:   /{id}
+    defaults: { _controller: YustPlayitBundle:Default:deleteContent }

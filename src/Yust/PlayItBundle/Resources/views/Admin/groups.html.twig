@@ -1,0 +1,49 @@
+{% extends 'YustPlayItBundle:Admin:default.html.twig' %}
+{% block head %}
+    {{ parent() }}
+    {% include 'YustPlayItBundle:Admin:deleteTemplate.html.twig' with
+        {'obj_delete' : 'grupo', 'route_delete' : 'null'}
+    %}
+{% endblock %}
+{% block body %}
+    {{ parent() }}   
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Grupos</h2> 
+            </div>
+            <div class="col-sm-4 pull-right">
+                <div class="btn-group">
+                     <a type="button" href="{{ path('newGroup_route') }}" class="btn btn-primary"> 
+                         <span class="glyphicon glyphicon-plus"></span> Nuevo
+                     </a>
+                </div>
+            </div>
+        </div>
+        {{ include('YustPlayItBundle:Admin:groupsTable.html.twig') }}
+    </div>
+    <script>
+        get_template = function(name) {
+            return _.template(($("#" + name + "-template")).html());
+        };
+        $(document).ready(function(){
+            $('.clickable-col').click(function() {
+                window.document.location = $(this).parent().data("href");
+            });
+            $("#overview").removeClass('active');
+            $("#devices").removeClass('active');
+            $("#groups").addClass('active');
+            $('[data-toggle="popover"]').popover({
+                content: get_template('confirm-delete'),
+                triger: 'manual'
+                }).click(function() {
+                    var groupId = $(this).data('id');
+                    $(this).popover('show');
+                    $("a.confirm-delete").attr("href", Routing.generate('deleteGroup_route', { groupId: groupId }));
+                    $(".cancel-delete").click(function() {
+                        $(this).closest(".popover").popover('hide');
+                     });
+            }); 
+        });
+    </script>
+{% endblock %}

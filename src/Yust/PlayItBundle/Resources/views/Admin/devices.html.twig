@@ -1,0 +1,49 @@
+{% extends 'YustPlayItBundle:Admin:default.html.twig' %}
+{% block head %}
+    {{ parent() }}
+    {% include 'YustPlayItBundle:Admin:deleteTemplate.html.twig' with
+        {'obj_delete' : 'dispositivo', 'route_delete' : 'null'}
+    %}
+{% endblock %}
+{% block body %}
+    {{ parent() }}   
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Dispositivos</h2> 
+            </div>
+            {% if is_granted('ROLE_ADMIN') %}  
+                <div class="col-sm-4 pull-right">
+                    <div class="btn-group">
+                         <a type="button" href="{{ path('newDevice_route') }}" class="btn btn-primary"> 
+                             <span class="glyphicon glyphicon-plus"></span> Nuevo
+                         </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {{ include('YustPlayItBundle:Admin:devicesTable.html.twig') }}
+    </div>
+    <script>
+        get_template = function(name) {
+            return _.template(($("#" + name + "-template")).html());
+        };
+        $(document).ready(function(){
+            $("#overview").removeClass('active');
+            $("#groups").removeClass('active');
+            $("#devices").addClass('active');
+            $('[data-toggle="popover"]').popover({
+                content: get_template('confirm-delete'),
+                triger: 'manual'
+                }).click(function() {
+                    var device_id = $(this).data('id');
+                    $(this).popover('show');
+                    $("a.confirm-delete").attr("href", Routing.generate('deleteDevice_route', { deviceId: device_id }));
+                    $(".cancel-delete").click(function() {
+                        $(this).closest(".popover").popover('hide');
+                     });
+            });            
+        });
+    </script>
+{% endblock %}
+

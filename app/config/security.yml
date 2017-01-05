@@ -1,0 +1,52 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        Yust\PlayItBundle\Entity\User:
+            algorithm: bcrypt
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        our_db_provider:
+            entity:
+                class: YustPlayItBundle:User
+                property: username
+
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        default:
+            anonymous: ~
+            http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                provider: our_db_provider
+            logout:
+                path: /logout
+                target: /login
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/cookbook/security/access_control.html
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetPasswd, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/getContentList, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/getConfig, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/users, roles: ROLE_ADMIN }
+        - { path: ^/admin/newUser, roles: ROLE_ADMIN }
+        - { path: ^/admin/newDevice, roles: ROLE_ADMIN }
+        - { path: ^/admin/deleteDevice, roles: ROLE_ADMIN }
+        - { path: ^/initialize, roles: ROLE_ADMIN}

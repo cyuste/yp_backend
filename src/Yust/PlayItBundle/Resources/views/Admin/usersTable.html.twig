@@ -1,0 +1,20 @@
+<table class="table table-condensed" id="table-available" >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if users|length > 0 %}
+            {% for user in users %}
+                <tr class='clickable-row' id="{{user.id}}" data-href='{{ path('groups_route')}}/{{user.id}}'>
+                    <td> {{user.id}}</td>
+                    <td> {{user.username}}</td>
+                    <td> {{user.email}}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>

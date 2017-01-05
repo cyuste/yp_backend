@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h2>Contenidos activos</h2> 
+        </div>
+    </div>
+    {% include('@YustPlayIt/Client/activeList.html.twig') %}
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <div class="pull-right">
+               <div class="btn-group">
+                    <button type="button" title="Subir nuevo contenido" id="newContent" class="btn btn-primary"> 
+                        <span class="glyphicon glyphicon-plus"></span> Nuevo
+                    </button>
+               </div>
+            </div>
+            <h2>Contenidos disponibles</h2>
+        </div>
+    </div>
+    {% include('@YustPlayIt/Client/allList.html.twig') %}
+</div>

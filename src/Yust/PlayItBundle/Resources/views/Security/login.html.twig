@@ -1,0 +1,25 @@
+{% extends '@YustPlayIt/Client/base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets '@YustPlayItBundle/Resources/public/css/signin.css' %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <form class="form-signin" action="{{ path('login_check') }}" method="post">
+            <h2 class="form-signin-heading">¡Hola! Por favor, identifícate:</h2>
+            <label for="username" class="sr-only">Usuario</label>
+            <input type="text" id="username" name="_username" class="form-control" 
+              placeholder="Usuario" value="{{ last_username }}" required="" autofocus="">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" class="form-control" name="_password"
+              placeholder="Password" required="">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+            <a href="{{ path('reset_passwd') }}">He olvidado la contraseña</a>
+            {% if error %}
+                <div class="error-msg">Usuario/contraseña incorrectos ({{ error.messageKey|trans(error.messageData) }})</div>
+            {% endif %}
+        </form> 
+    </div>         
+{% endblock %}

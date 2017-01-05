@@ -1,0 +1,30 @@
+<table class="table table-condensed" id="table-available" >
+    <thead>
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Usuario</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if groups|length > 0 %}
+            {% for group in groups %}
+                <tr  id="{{group.id}}" data-href='{{ path('devices_route')}}/{{group.id}}'>
+                    <td>
+                        <a class="edit-asset-button btn" href="{{ path('updateGroup_route', {'groupId' : group.id}) }}"> 
+                            <span class="glyphicon glyphicon-edit" data-action="erase" data-id="{{ group.id }}"></span>
+                        </a>
+                        <button class="delete-asset-button btn" data-toggle="popover" data-html="true" data-id="{{ group.id }}"
+                          data-placement="right" data-title="¿Estás seguro?" data-trigger="manual" type="button" data-original-title="">
+                          <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
+                    <td class='clickable-col'> {{group.id}}</td>
+                    <td class='clickable-col'> {{group.name}}</td>
+                    <td class='clickable-col'> {{group.user.username}}</td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>

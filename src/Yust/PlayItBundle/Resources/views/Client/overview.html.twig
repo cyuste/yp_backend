@@ -1,0 +1,41 @@
+{% extends '@YustPlayIt/Client/base.html.twig' %}
+{% block head %}
+    {{ parent() }}
+    {% include('@YustPlayIt/Client/deleteTemplate.html.twig') %}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1 class="page-header">
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" title="Cambiar el grupo gestionado"
+                             class="btn btn-primary dropdown-toggle" 
+                             data-toggle="dropdown" aria-expanded="false">
+                                Cambiar <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                {% for g in groups %}
+                                    <li><a href="{{ path('homepage') }}{{g.id}}">{{ g.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    Resumen: {{ current_group_name }}
+                </h1>
+            </div>
+        </div>   
+    </div>
+
+    <div id="contents-tables">
+        {% include('@YustPlayIt/Client/assetsTables.html.twig') %}
+    </div>
+
+    <div id="addFormContainer">
+        {% include "@YustPlayIt/Client/assetModalContainer.html.twig" %}
+    </div>
+    <div id="editFormContainer"></div>
+{% endblock %}

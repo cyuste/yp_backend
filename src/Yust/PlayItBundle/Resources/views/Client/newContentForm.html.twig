@@ -1,0 +1,40 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{{ form_start(form,{'attr': {'id':'myForm','class':'form-horizontal'} }) }}
+<div class="modal-body">
+    <ul id="myTab" class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Archivo</a></li>
+        <li role="presentation"><a href="#">Web</a></li>
+    </ul>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div id="file" class="tab-pane active"> 
+            <div class="col-sm-10">
+                {{ form_row(form.content.file) }}
+                {{ form_row(form.content.name) }}
+                {{ form_row(form.content.type) }}
+                {{ form_row(form.content.length) }}       
+                <div id="video-help" hidden>
+                  Dejar a 0 para autodetectar duración del video
+                </div>
+                <div id="ppt-help" hidden>
+                  <span class="glyphicon glyphicon-question-sign"></span> 
+                  <a href="http://yustplayit.com/howToPPT" target="_blank">Cómo subir presentaciones</a>
+                </div>
+                <div class="form-group img_opts" hidden>
+                    {{ form_row(form.content.scale) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+<div class="modal-footer">
+    <div class="progress" hidden>
+        <div class="bar"></div>
+        <div class="percent">0%</div>
+    </div>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'} }) }}
+</div>
+{{ form_end(form) }}
+
+

@@ -1,0 +1,29 @@
+{% extends 'YustPlayItBundle:Admin:default.html.twig' %}
+{% block body %}
+    {{ parent() }}   
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>Usuarios</h2> 
+            </div>
+            <div class="col-sm-4 pull-right">
+                <div class="btn-group">
+                     <a type="button" href="{{ path('newUser_route') }}" class="btn btn-primary"> 
+                         <span class="glyphicon glyphicon-plus"></span> Nuevo
+                     </a>
+                </div>
+            </div>
+        </div>
+        {{ include('YustPlayItBundle:Admin:usersTable.html.twig') }}
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".clickable-row").click(function() {
+                window.document.location = $(this).data("href");
+            });  
+            $("#groups").removeClass('active');
+            $("#devices").removeClass('active');
+            $("#overview").addClass('active');
+        });
+    </script>
+{% endblock %}

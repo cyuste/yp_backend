@@ -1,0 +1,12 @@
+
+{% macro iconType(type) %}
+    {% if type == "image" %}
+        <span class="glyphicon glyphicon-picture"></span>
+    {% elseif type == "video" %}
+        <span class="glyphicon glyphicon-film"></span>
+    {% elseif type == "web" %}
+        <span class="glyphicon glyphicon-globe"></span>
+    {% elseif type == "presentation" %}
+        <span class="glyphicon glyphicon-blackboard"></span>
+    {% endif %}
+{% endmacro %}

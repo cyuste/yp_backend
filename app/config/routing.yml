@@ -1,0 +1,25 @@
+# The problem if I include all the directory is that the default controller is
+# loaded before the security controller and the routing fails (goes directly to
+# main page
+
+security:
+    resource: "@YustPlayItBundle/Controller/SecurityController.php"
+    type: annotation
+
+admin:
+    resource: "@YustPlayItBundle/Controller/AdminController.php"
+    type: annotation
+   
+clients:
+    resource: "@YustPlayItBundle/Controller/ClientController.php"
+    type: annotation
+
+yust_play_it:
+    resource: "@YustPlayItBundle/Controller/SchedulerController.php"
+    type: annotation
+      
+logout:
+    path: /logout
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

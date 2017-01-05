@@ -1,0 +1,15 @@
+{% extends 'YustPlayItBundle:Admin:default.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %} 
+
+{% block body %}
+    {{ parent() }}
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-8">
+            {{ form_start(form) }}
+            {{ form_row(form.device.name) }}
+            {{ form_row(form.device.group) }}
+            {{ form_end(form) }} 
+        </div>
+    </div>
+{% endblock %}

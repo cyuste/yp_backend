@@ -1,0 +1,40 @@
+{% import "@YustPlayIt/Client/macros.html.twig" as macros %}
+<table class="table table-condensed assets-table" id="table-active" data-group_id="{{ current_group_id }}">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody class="sortable">
+        {% if contents_on|length > 0 %}
+            {% for gcont in contents_on %}
+                <tr id="{{gcont.id}}" class="row-handle" data-assetid="{{ gcont.content.id }}">
+                    <td>
+                        {# <span class="glyphicon glyphicon-menu-hamburger font_glyph_order"></span> #}
+                        {% image '@YustPlayItBundle/Resources/public/img/drag-handle.png' %}
+                            <img src="{{ asset_url }}" alt="" />
+                        {% endimage %}
+                        {{ macros.iconType(gcont.content.type.name) }}
+                        {{gcont.content.name}}
+                    </td>
+                    <td class="asset_row_btns" style="width:13%; min-width:120px">
+                        <button class="edit-asset-button btn" type="button" title="Editar contenido">
+                          <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                        <button class="delete-asset-button btn" data-toggle="popover" data-placement="left"
+                         data-title="¿Estás seguro?" data-html="true" title="Eliminar contenido">
+                          <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
+                    <td class="asset_row_btns" style="width:7%; min-width:60px">
+                        <button class="turnoff_asset_button btn asset_btn_green" type="button" title="Desactivar contenido">
+                          <i class="glyphicon glyphicon-off"></i>
+                        </button>  
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
