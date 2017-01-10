@@ -208,7 +208,7 @@ class AdminController extends Controller
     public function newDeviceAdminAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new AddDeviceType(), new AddDevice());
+        $form = $this->createForm(AddDeviceType::class, new AddDevice());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
