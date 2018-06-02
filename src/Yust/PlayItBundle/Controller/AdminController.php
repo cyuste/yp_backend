@@ -94,7 +94,7 @@ class AdminController extends Controller
     public function newUserAdminAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new RegistrationType(), new Registration());
+        $form = $this->createForm(RegistrationType::class, new Registration());
         $form->handleRequest($request);
 
         if ($form->isValid()) {
