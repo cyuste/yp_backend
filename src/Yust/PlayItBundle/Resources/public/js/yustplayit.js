@@ -84,6 +84,7 @@ function activateEraseListener() {
                     $("#contents-tables").replaceWith(data);
                     refreshAssetsList();
                     refreshActiveList();
+                    activateNewContentButton();
                 }
             );
             $(this).closest(".popover").popover('hide');
@@ -128,6 +129,12 @@ function activateTabs(){
         e.preventDefault();
         $(this).tab('show');
         loadWebForm();
+    });
+}
+
+function activateNewContentButton(){
+    $('#newContent').click(function() {
+        loadAssetForm();   
     });
 }
 
@@ -277,9 +284,7 @@ $(document).ready(function(){
     activateEditListener();
     
     // Add new content listener
-    $('#newContent').click(function() {
-        loadAssetForm();   
-    });
+    activateNewContentButton();
 });
 
 
