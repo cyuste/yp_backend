@@ -119,12 +119,12 @@ function activateEditListener(){
 }
 
 function activateTabs(){
-    $('#myTab a:first').click(function (e) {
+    $("#myTab a:first").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
         loadAssetForm();
     });
-    $('#myTab a:last').click(function (e) {
+    $("#myTab a:last").click(function (e) {
         e.preventDefault();
         $(this).tab('show');
         loadWebForm();
@@ -144,7 +144,6 @@ function loadWebForm(){
         var options = {
             success: function(responseText,statusText,xhr, $form) {
                     $('#addModal').modal('hide');
-                    $('#addFormContainer').empty();
                     paintAssetsList(responseText);    
                 }       
         };

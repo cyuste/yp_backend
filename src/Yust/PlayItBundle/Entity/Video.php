@@ -44,7 +44,7 @@ class Video extends Content{
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
 
-        $this->getFile()->move($this->getUploadRootDir() .'/'. $this->getUser()->getUsername(), $this->path);
+        $this->getFile()->move($this->getUploadRootDir() .'/'. $this->getUser()->getUsername(), $this->path . '.mp4');
         //$this->recodeVideo(); // Automatically moves the file
         
         $this->createThumbnail();
@@ -63,7 +63,7 @@ class Video extends Content{
      */
     public function removeUpload()
     {
-        $file = $this->getAbsolutePath();
+        $file = $this->getAbsolutePath() .'.mp4';
         if ($file) {
             unlink($file);
         }
@@ -72,7 +72,7 @@ class Video extends Content{
     
     public function createThumbnail()
     {
-        $command = 'ffmpeg -i ' . $this->getAbsolutePath() . ' -vf scale=120:-1 -r 1  ' . $this->getThumbAbsolutePath();
+        $command = 'ffmpeg -i ' . $this->getAbsolutePath() .'.mp4' . ' -vf scale=120:-1 -r 1  ' . $this->getThumbAbsolutePath();
         exec($command);
         return 0;
     }
